@@ -54,9 +54,6 @@
     <ClCompile Include="source\GameOverState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\GameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\Label.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -109,6 +106,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\LevelOne.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelTwo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -188,9 +191,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\book\GameOverState.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\book\GameState.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\book\Label.hpp">
@@ -530,6 +530,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\sfml\window\WindowStyle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\book\LevelOne.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelTwo.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

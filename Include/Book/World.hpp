@@ -35,6 +35,8 @@ class World : private sf::NonCopyable
 
 		bool 								hasAlivePlayer() const;
 		bool 								hasPlayerReachedEnd() const;
+		bool								hasPlayerFinishedLevelOne() const;
+		bool								hasPlayerFinishedLevelTwo() const;
 
 
 	private:
@@ -97,6 +99,8 @@ class World : private sf::NonCopyable
 		std::vector<Aircraft*>				mActiveEnemies;
 
 		BloomEffect							mBloomEffect;
+		float								abductionCounter;
+		float								timer;
 };
 
 #endif // BOOK_WORLD_HPP

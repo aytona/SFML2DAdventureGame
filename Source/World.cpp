@@ -21,10 +21,11 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 , mSceneLayers()
 , mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 5000.f)
 , mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
-, mScrollSpeed(-50.f)
+, mScrollSpeed(50.f)
 , mPlayerAircraft(nullptr)
 , mEnemySpawnPoints()
 , mActiveEnemies()
+, timer(60.f)
 {
 	mSceneTexture.create(mTarget.getSize().x, mTarget.getSize().y);
 
@@ -38,7 +39,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 void World::update(sf::Time dt)
 {
 	// Scroll the world, reset player velocity
-	mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());	
+	//mWorldView.move(mPlayerAircraft->getVelocity());	
 	mPlayerAircraft->setVelocity(0.f, 0.f);
 
 	// Setup commands to destroy entities, and guide missiles
@@ -60,6 +61,9 @@ void World::update(sf::Time dt)
 	// Regular update step, adapt position (correct if outside view)
 	mSceneGraph.update(dt, mCommandQueue);
 	adaptPlayerPosition();
+
+	if (hasPlayerFinishedLevelOne())
+		timer -= dt.asSeconds();
 }
 
 void World::draw()
@@ -92,6 +96,16 @@ bool World::hasAlivePlayer() const
 bool World::hasPlayerReachedEnd() const
 {
 	return !mWorldBounds.contains(mPlayerAircraft->getPosition());
+}
+
+bool World::hasPlayerFinishedLevelOne() const
+{
+	return abductionCounter >= 15;
+}
+
+bool World::hasPlayerFinishedLevelTwo() const
+{
+	return timer <= 0;
 }
 
 void World::loadTextures()
@@ -243,7 +257,7 @@ void World::buildScene()
 void World::addEnemies()
 {
 	// Add enemies to the spawn point container
-	addEnemy(Aircraft::Raptor,    0.f,  500.f);
+	/*addEnemy(Aircraft::Raptor,    0.f,  500.f);
 	addEnemy(Aircraft::Raptor,    0.f, 1000.f);
 	addEnemy(Aircraft::Raptor, +100.f, 1150.f);
 	addEnemy(Aircraft::Raptor, -100.f, 1150.f);
@@ -267,8 +281,12 @@ void World::addEnemies()
 	addEnemy(Aircraft::Avenger,   0.f, 4000.f);
 	addEnemy(Aircraft::Avenger,-200.f, 4200.f);
 	addEnemy(Aircraft::Raptor,  200.f, 4200.f);
-	addEnemy(Aircraft::Raptor,    0.f, 4400.f);
+	addEnemy(Aircraft::Raptor,    0.f, 4400.f);*/
 
+	for (int i = 0; i < 24; i++)
+	{
+		addEnemy(Aircraft::Raptor, rand() % 600 + (-300.f), (i * 100.f) + 500.f);
+	}
 
 	// Sort all enemies according to their y value, such that lower enemies are checked first for spawning
 	std::sort(mEnemySpawnPoints.begin(), mEnemySpawnPoints.end(), [] (SpawnPoint lhs, SpawnPoint rhs)
