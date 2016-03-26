@@ -111,7 +111,7 @@
     <ClCompile Include="source\LevelOne.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelTwo.cpp">
+    <ClCompile Include="Source\LevelTwo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -535,7 +535,7 @@
     <ClInclude Include="include\book\LevelOne.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LevelTwo.hpp">
+    <ClInclude Include="Include\Book\LevelTwo.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -74,7 +74,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LevelTwo.cpp" />
     <ClCompile Include="source\Aircraft.cpp" />
     <ClCompile Include="source\Animation.cpp" />
     <ClCompile Include="source\Application.cpp" />
@@ -90,6 +89,7 @@
     <ClCompile Include="source\GameOverState.cpp" />
     <ClCompile Include="source\LevelOne.cpp" />
     <ClCompile Include="source\Label.cpp" />
+    <ClCompile Include="Source\LevelTwo.cpp" />
     <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="source\MenuState.cpp" />
     <ClCompile Include="source\ParticleNode.cpp" />
@@ -138,6 +138,7 @@
     <ClInclude Include="include\book\GameOverState.hpp" />
     <ClInclude Include="include\book\LevelOne.hpp" />
     <ClInclude Include="include\book\Label.hpp" />
+    <ClInclude Include="Include\Book\LevelTwo.hpp" />
     <ClInclude Include="include\book\MenuState.hpp" />
     <ClInclude Include="include\book\Particle.hpp" />
     <ClInclude Include="include\book\ParticleNode.hpp" />
@@ -250,7 +251,6 @@
     <ClInclude Include="include\sfml\window\Window.hpp" />
     <ClInclude Include="include\sfml\window\WindowHandle.hpp" />
     <ClInclude Include="include\sfml\window\WindowStyle.hpp" />
-    <ClInclude Include="LevelTwo.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
