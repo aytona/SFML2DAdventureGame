@@ -37,8 +37,17 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 
 void World::update(sf::Time dt)
 {
+	if (!mPlayerAircraft->isDestroyed()){
+
 	// Scroll the world, reset player velocity
-	mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());	
+	//	mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());	
+
+
+		
+	mWorldView.move(mPlayerAircraft->getVelocity()*dt.asSeconds());
+	//mWorldView.set
+
+}
 	mPlayerAircraft->setVelocity(0.f, 0.f);
 
 	// Setup commands to destroy entities, and guide missiles
@@ -126,7 +135,7 @@ void World::adaptPlayerVelocity()
 		mPlayerAircraft->setVelocity(velocity / std::sqrt(2.f));
 
 	// Add scrolling velocity
-	mPlayerAircraft->accelerate(0.f, mScrollSpeed);
+//	mPlayerAircraft->accelerate(0.f, mScrollSpeed);
 }
 
 bool matchesCategories(SceneNode::Pair& colliders, Category::Type type1, Category::Type type2)
