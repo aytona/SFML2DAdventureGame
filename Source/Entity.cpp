@@ -27,6 +27,9 @@ sf::Vector2f Entity::getVelocity() const
 
 void Entity::accelerate(sf::Vector2f velocity)
 {
+//	if (getPosition().x >= mWorldBounds.left && mPlayerAircraft->getPosition().x <= mWorldBounds.left + mWorldBounds.width
+	//	&& mPlayerAircraft->getPosition().y >= mWorldBounds.top && mPlayerAircraft->getPosition().y <= mWorldBounds.top + mWorldBounds.height))
+//	getPosition
 	mVelocity += velocity;
 }
 

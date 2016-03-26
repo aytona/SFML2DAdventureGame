@@ -25,7 +25,8 @@ bool LevelOne::update(sf::Time dt)
 	}
 
 	// Counter
-	else if (mWorld.hasPlayerFinishedLevelOne())
+
+	else if (mWorld.hasPlayerReachedEnd())
 	{
 		requestStateClear();
 		requestStackPush(States::LevelTwo);

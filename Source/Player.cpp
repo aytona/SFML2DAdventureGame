@@ -19,6 +19,7 @@ struct AircraftMover
 
 	void operator() (Aircraft& aircraft, sf::Time) const
 	{
+		
 		aircraft.accelerate(velocity * aircraft.getMaxSpeed());
 	}
 
@@ -29,10 +30,10 @@ Player::Player()
 : mCurrentMissionStatus(MissionRunning)
 {
 	// Set initial key bindings
-	mKeyBinding[sf::Keyboard::Left] = MoveLeft;
-	mKeyBinding[sf::Keyboard::Right] = MoveRight;
-	mKeyBinding[sf::Keyboard::Up] = MoveUp;
-	mKeyBinding[sf::Keyboard::Down] = MoveDown;
+	mKeyBinding[sf::Keyboard::A] = MoveLeft;
+	mKeyBinding[sf::Keyboard::D] = MoveRight;
+	mKeyBinding[sf::Keyboard::W] = MoveUp;
+	mKeyBinding[sf::Keyboard::S] = MoveDown;
 	mKeyBinding[sf::Keyboard::Space] = Fire;
 	mKeyBinding[sf::Keyboard::M] = LaunchMissile;
  
