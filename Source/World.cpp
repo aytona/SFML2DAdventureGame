@@ -9,8 +9,8 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
-
-
+#include <iostream>
+using namespace std;
 World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 : mTarget(outputTarget)
 , mSceneTexture()
@@ -26,6 +26,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 , mEnemySpawnPoints()
 , mActiveEnemies()
 , timer(60.f)
+, abductionCounter(0)
 {
 	mSceneTexture.create(mTarget.getSize().x, mTarget.getSize().y);
 
@@ -43,7 +44,7 @@ void World::update(sf::Time dt)
 
 	// Scroll the world, reset player velocity
 
-		
+		cout << abductionCounter << endl;
 	mWorldView.move(mPlayerAircraft->getVelocity()*dt.asSeconds());
 
 	}
@@ -192,7 +193,7 @@ void World::handleCollisions()
 		{
 			auto& player = static_cast<Aircraft&>(*pair.first);
 			auto& pickup = static_cast<Pickup&>(*pair.second);
-
+			abductionCounter++;
 			// Apply pickup effect to player, destroy projectile
 			pickup.apply(player);
 			pickup.destroy();
@@ -203,7 +204,7 @@ void World::handleCollisions()
 		{
 			auto& aircraft = static_cast<Aircraft&>(*pair.first);
 			auto& projectile = static_cast<Projectile&>(*pair.second);
-
+			abductionCounter++;
 			// Apply projectile damage to aircraft, destroy projectile
 			aircraft.damage(projectile.getDamage());
 			projectile.destroy();
@@ -294,7 +295,10 @@ void World::addEnemies()
 	{
 		addEnemy(Aircraft::Raptor, rand() % 600 + (-300.f), (i * 100.f) + 500.f);
 	}
-
+	for (int i = 0; i < 15; i++)
+	{
+		addEnemy(Aircraft::Avenger, rand() % 1024, rand() % 2000);
+	}
 	// Sort all enemies according to their y value, such that lower enemies are checked first for spawning
 	std::sort(mEnemySpawnPoints.begin(), mEnemySpawnPoints.end(), [] (SpawnPoint lhs, SpawnPoint rhs)
 	{
