@@ -3,6 +3,7 @@
 #include <Book/Projectile.hpp>
 #include <Book/Pickup.hpp>
 #include <Book/Particle.hpp>
+#include <Book/People.hpp>
 
 
 // For std::bind() placeholders _1, _2, ...
@@ -100,4 +101,12 @@ std::vector<ParticleData> initializeParticleData()
 	data[Particle::Smoke].lifetime = sf::seconds(4.f);
 
 	return data;
+}
+
+std::vector<PeopleData> initializePeopleData()
+{
+	std::vector<PeopleData> data(People::TypeCount);
+
+	// TODO: Need texture for people
+
 }

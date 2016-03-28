@@ -114,6 +114,9 @@
     <ClCompile Include="Source\LevelTwo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\People.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\book\ResourceHolder.inl">
@@ -536,6 +539,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\Book\LevelTwo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Book\People.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

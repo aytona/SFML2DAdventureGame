@@ -57,10 +57,17 @@ struct ParticleData
 	sf::Time						lifetime;
 };
 
+struct PeopleData
+{
+	int								amount;				// The amount of people in 1 texture
+	Textures::ID					texture;
+	sf::IntRect						textureRect;
+};
 
 std::vector<AircraftData>	initializeAircraftData();
 std::vector<ProjectileData>	initializeProjectileData();
 std::vector<PickupData>		initializePickupData();
 std::vector<ParticleData>	initializeParticleData();
+std::vector<PeopleData>		initializePeopleData();
 
 #endif // BOOK_DATATABLES_HPP

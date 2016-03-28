@@ -94,6 +94,7 @@
     <ClCompile Include="source\MenuState.cpp" />
     <ClCompile Include="source\ParticleNode.cpp" />
     <ClCompile Include="source\PauseState.cpp" />
+    <ClCompile Include="Source\People.cpp" />
     <ClCompile Include="source\Pickup.cpp" />
     <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\PostEffect.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="include\book\Particle.hpp" />
     <ClInclude Include="include\book\ParticleNode.hpp" />
     <ClInclude Include="include\book\PauseState.hpp" />
+    <ClInclude Include="Include\Book\People.hpp" />
     <ClInclude Include="include\book\Pickup.hpp" />
     <ClInclude Include="include\book\Player.hpp" />
     <ClInclude Include="include\book\PostEffect.hpp" />
