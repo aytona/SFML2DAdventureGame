@@ -1,4 +1,0 @@
-*.obj
-*.sln
-*.sdf
-*.opensdf
