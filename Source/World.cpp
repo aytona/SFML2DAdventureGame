@@ -123,6 +123,7 @@ void World::loadTextures()
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 	mTextures.load(Textures::Particle, "Media/Textures/Particle.png");
 	mTextures.load(Textures::FinishLine, "Media/Textures/FinishLine.png");
+	mTextures.load(Textures::People, "Media/Textures/People.png");
 }
 
 void World::adaptPlayerPosition()

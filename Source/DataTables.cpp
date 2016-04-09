@@ -107,6 +107,11 @@ std::vector<PeopleData> initializePeopleData()
 {
 	std::vector<PeopleData> data(People::TypeCount);
 
-	// TODO: Need texture for people
+	data[People::Solo].texture = Textures::People;
+	data[People::Solo].textureRect = sf::IntRect(40, 0, 40, 40);
+	
+	data[People::Group].texture = Textures::People;
+	data[People::Group].textureRect = sf::IntRect(0, 0, 40, 40);
 
+	return data;
 }

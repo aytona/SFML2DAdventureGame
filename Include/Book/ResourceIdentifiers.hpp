@@ -21,6 +21,7 @@ namespace Textures
 		Explosion,
 		Particle,
 		FinishLine,
+		People,
 	};
 }
 
