@@ -99,7 +99,7 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Button::changeTexture(Type buttonType)
 {
-	sf::IntRect textureRect(0, 50*buttonType, 200, 50);
+	sf::IntRect textureRect(0, 50*buttonType, 350, 50);
 	mSprite.setTextureRect(textureRect);
 }
 
