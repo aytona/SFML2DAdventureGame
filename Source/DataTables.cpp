@@ -16,9 +16,9 @@ std::vector<AircraftData> initializeAircraftData()
 	data[Aircraft::Eagle].hitpoints = 100;
 	data[Aircraft::Eagle].speed = 200.f;
 	data[Aircraft::Eagle].fireInterval = sf::seconds(1);
-	data[Aircraft::Eagle].texture = Textures::Entities;
-	data[Aircraft::Eagle].textureRect = sf::IntRect(0, 0, 48, 64);
-	data[Aircraft::Eagle].hasRollAnimation = true;
+	data[Aircraft::Eagle].texture = Textures::UFO;
+	data[Aircraft::Eagle].textureRect = sf::IntRect(0, 0, 100, 99);
+	data[Aircraft::Eagle].hasRollAnimation = false;
 
 	data[Aircraft::Raptor].hitpoints = 20;
 	data[Aircraft::Raptor].speed = 80.f;

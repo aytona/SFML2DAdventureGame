@@ -124,6 +124,7 @@ void World::loadTextures()
 	mTextures.load(Textures::Particle, "Media/Textures/Particle.png");
 	mTextures.load(Textures::FinishLine, "Media/Textures/FinishLine.png");
 	mTextures.load(Textures::People, "Media/Textures/People.png");
+	mTextures.load(Textures::UFO, "Media/Textures/UFO.png");	
 }
 
 void World::adaptPlayerPosition()

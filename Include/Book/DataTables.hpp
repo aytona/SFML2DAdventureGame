@@ -59,7 +59,7 @@ struct ParticleData
 
 struct PeopleData
 {
-	int								amount;				// The amount of people in 1 texture
+	int								amount;
 	Textures::ID					texture;
 	sf::IntRect						textureRect;
 };

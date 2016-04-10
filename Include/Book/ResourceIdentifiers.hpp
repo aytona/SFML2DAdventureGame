@@ -22,6 +22,7 @@ namespace Textures
 		Particle,
 		FinishLine,
 		People,
+		UFO,
 	};
 }
 
