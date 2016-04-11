@@ -20,7 +20,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 , mSceneGraph()
 , mSceneLayers()
 , mWorldBounds(0.f, 0.f, 5000.f, 5000.f)
-, mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
+, mSpawnPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
 , mScrollSpeed(50.f)
 , mPlayerAircraft(nullptr)
 , mEnemySpawnPoints()
@@ -248,10 +248,10 @@ void World::buildScene()
 	mSceneLayers[Background]->attachChild(std::move(levelOneSprite));
 
 	// Add the finish line to the scene
-	sf::Texture& finishTexture = mTextures.get(Textures::FinishLine);
+	/*sf::Texture& finishTexture = mTextures.get(Textures::FinishLine);
 	std::unique_ptr<SpriteNode> finishSprite(new SpriteNode(finishTexture));
 	finishSprite->setPosition(0.f, -76.f);
-	mSceneLayers[Background]->attachChild(std::move(finishSprite));
+	mSceneLayers[Background]->attachChild(std::move(finishSprite));*/
 
 	// Add particle node to the scene
 	std::unique_ptr<ParticleNode> smokeNode(new ParticleNode(Particle::Smoke, mTextures));
