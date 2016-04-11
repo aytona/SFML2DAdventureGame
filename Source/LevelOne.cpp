@@ -1,17 +1,31 @@
 #include <Book/LevelOne.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <Book/Utility.hpp>
 
 LevelOne::LevelOne(StateStack& stack, Context context)
 : State(stack, context)
 , mWorld(*context.window, *context.fonts)
 , mPlayer(*context.player)
+, mPeopleCounter()
+, mPeopleAmount()
 {
 	mPlayer.setMissionStatus(Player::MissionRunning);
+	mPeopleCounter.setFont(context.fonts->get(Fonts::Main));
+	mPeopleCounter.setCharacterSize(20);
+	mPeopleCounter.setString("Abducted: " + toString(mPeopleAmount));
+	centerOrigin(mPeopleCounter);
+	mPeopleCounter.setPosition(sf::Vector2f(context.window->getSize().x / 2u, 50.f));
+
 }
 
 void LevelOne::draw()
 {
 	mWorld.draw();
+	
+	sf::RenderWindow& window = *getContext().window;
+	window.setView(window.getDefaultView());
+
+	window.draw(mPeopleCounter);
 }
 
 bool LevelOne::update(sf::Time dt)
@@ -26,7 +40,7 @@ bool LevelOne::update(sf::Time dt)
 
 	// Counter
 
-	else if (mWorld.hasPlayerReachedEnd())
+	else if (mWorld.hasPlayerFinishedLevelOne())
 	{
 		requestStateClear();
 		requestStackPush(States::LevelTwo);
