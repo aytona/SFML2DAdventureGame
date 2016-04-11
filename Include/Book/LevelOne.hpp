@@ -22,8 +22,8 @@ class LevelOne : public State
 	private:
 		World				mWorld;
 		Player&				mPlayer;
-
-		
+		sf::Text			mPeopleCounter;
+		float				mPeopleAmount;
 };
 
 #endif // BOOK_GAMESTATE_HPP
