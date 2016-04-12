@@ -32,7 +32,7 @@ class World : private sf::NonCopyable
 		void								draw();
 		
 		CommandQueue&						getCommandQueue();
-		void                                addPeople(People::Type type, float relX, float relY);
+		
 		bool 								hasAlivePlayer() const;
 		bool 								hasPlayerReachedEnd() const;
 		bool								hasPlayerFinishedLevelOne() const;
@@ -50,7 +50,8 @@ class World : private sf::NonCopyable
 		void								adaptPlayerPosition();
 		void								adaptPlayerVelocity();
 		void								handleCollisions();
-		
+		void                                addHumans();
+		void                                addPeople(People::Type type, float relX, float relY);
 		void								buildScene();
 		void								addEnemies();
 		void								addEnemy(Aircraft::Type type, float relX, float relY);
