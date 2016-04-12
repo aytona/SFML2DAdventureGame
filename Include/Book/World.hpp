@@ -9,7 +9,7 @@
 #include <Book/CommandQueue.hpp>
 #include <Book/Command.hpp>
 #include <Book/BloomEffect.hpp>
-
+#include <Book/People.hpp>
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -32,12 +32,12 @@ class World : private sf::NonCopyable
 		void								draw();
 		
 		CommandQueue&						getCommandQueue();
-
+		void                                addPeople(People::Type type, float relX, float relY);
 		bool 								hasAlivePlayer() const;
 		bool 								hasPlayerReachedEnd() const;
 		bool								hasPlayerFinishedLevelOne() const;
 		bool								hasPlayerFinishedLevelTwo() const;
-
+		void                                SpawnPeople();
 
 	private:
 		void								loadTextures();
@@ -53,7 +53,7 @@ class World : private sf::NonCopyable
 		void								guideMissiles();
 		sf::FloatRect						getViewBounds() const;
 		sf::FloatRect						getBattlefieldBounds() const;
-
+	
 
 	private:
 		enum Layer
@@ -77,7 +77,19 @@ class World : private sf::NonCopyable
 			float x;
 			float y;
 		};
+		struct PeopleSpawn
+		{
+			PeopleSpawn(People::Type type, float x, float y)
+				: type(type)
+				, x(x)
+				, y(y)
+			{
+			}
 
+			People::Type type;
+			float x;
+			float y;
+		};
 
 	private:
 		sf::RenderTarget&					mTarget;
@@ -96,6 +108,7 @@ class World : private sf::NonCopyable
 		Aircraft*							mPlayerAircraft;
 
 		std::vector<SpawnPoint>				mEnemySpawnPoints;
+		std::vector<PeopleSpawn>            mPeopleSpawnPoints;
 		std::vector<Aircraft*>				mActiveEnemies;
 
 		BloomEffect							mBloomEffect;

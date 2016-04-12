@@ -25,6 +25,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 , mPlayerAircraft(nullptr)
 , mEnemySpawnPoints()
 , mActiveEnemies()
+, mPeopleSpawnPoints()
 , timer(60.f)
 , abductionCounter(0)
 {
@@ -83,6 +84,7 @@ void World::draw()
 		mSceneTexture.draw(mSceneGraph);
 		mSceneTexture.display();
 		mBloomEffect.apply(mSceneTexture, mTarget);
+
 	}
 	else
 	{
@@ -263,6 +265,24 @@ void World::buildScene()
 	// Add enemy aircraft
 	addEnemies();
 }
+void World::SpawnPeople()
+{
+	// Spawn all enemies entering the view area (including distance) this frame
+	while (!mPeopleSpawnPoints.empty()
+		&& mPeopleSpawnPoints.back().y > getBattlefieldBounds().top)
+	{
+		PeopleSpawn spawn = mPeopleSpawnPoints.back();
+
+		std::unique_ptr<People> enemy(new People(spawn.type, mTextures));
+		enemy->setPosition(spawn.x, spawn.y);
+		enemy->setRotation(0.f);
+
+		mSceneLayers[UpperAir]->attachChild(std::move(enemy));
+
+		// Enemy is spawned, remove from the list to spawn
+		mPeopleSpawnPoints.pop_back();
+	}
+}
 
 void World::addEnemies()
 {
@@ -312,6 +332,11 @@ void World::addEnemy(Aircraft::Type type, float relX, float relY)
 {
 	SpawnPoint spawn(type, mSpawnPosition.x + relX, mSpawnPosition.y - relY);
 	mEnemySpawnPoints.push_back(spawn);
+}
+void World::addPeople(People::Type type, float relX, float relY)
+{
+	PeopleSpawn people(type, mSpawnPosition.x + relX, mSpawnPosition.y - relY);
+	mPeopleSpawnPoints.push_back(people);
 }
 
 void World::spawnEnemies()
