@@ -21,6 +21,7 @@ class MenuState : public State
 	private:
 		sf::Sprite				mBackgroundSprite;
 		GUI::Container			mGUIContainer;
+		sf::Text				mTitle;
 };
 
 #endif // BOOK_MENUSTATE_HPP

@@ -19,8 +19,8 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 , mFonts(fonts)
 , mSceneGraph()
 , mSceneLayers()
-, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 5000.f)
-, mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
+, mWorldBounds(0.f, 0.f, 5000.f, 5000.f)
+, mSpawnPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
 , mScrollSpeed(50.f)
 , mPlayerAircraft(nullptr)
 , mEnemySpawnPoints()
@@ -127,6 +127,8 @@ void World::loadTextures()
 	mTextures.load(Textures::FinishLine, "Media/Textures/FinishLine.png");
 	mTextures.load(Textures::People, "Media/Textures/People.png");
 	mTextures.load(Textures::UFO, "Media/Textures/UFO.png");	
+	mTextures.load(Textures::LevelOne, "Media/Textures/LevelOne.jpg");
+	mTextures.load(Textures::LevelTwo, "Media/Textures/LevelTwo.jpg");
 }
 
 void World::adaptPlayerPosition()
@@ -230,23 +232,28 @@ void World::buildScene()
 	}
 
 	// Prepare the tiled background
-	sf::Texture& jungleTexture = mTextures.get(Textures::Jungle);
-	jungleTexture.setRepeated(true);
+	/*sf::Texture& jungleTexture = mTextures.get(Textures::Jungle);
+	jungleTexture.setRepeated(true);*/
+	sf::Texture& levelOneTexture = mTextures.get(Textures::LevelOne);
+	levelOneTexture.setRepeated(true);
 
 	float viewHeight = mWorldView.getSize().y;
 	sf::IntRect textureRect(mWorldBounds);
 	textureRect.height += static_cast<int>(viewHeight);
 
 	// Add the background sprite to the scene
-	std::unique_ptr<SpriteNode> jungleSprite(new SpriteNode(jungleTexture, textureRect));
+	/*std::unique_ptr<SpriteNode> jungleSprite(new SpriteNode(jungleTexture, textureRect));
 	jungleSprite->setPosition(mWorldBounds.left, mWorldBounds.top - viewHeight);
-	mSceneLayers[Background]->attachChild(std::move(jungleSprite));
+	mSceneLayers[Background]->attachChild(std::move(jungleSprite));*/
+	std::unique_ptr<SpriteNode> levelOneSprite(new SpriteNode(levelOneTexture, textureRect));
+	levelOneSprite->setPosition(mWorldBounds.left, mWorldBounds.top - viewHeight);
+	mSceneLayers[Background]->attachChild(std::move(levelOneSprite));
 
 	// Add the finish line to the scene
-	sf::Texture& finishTexture = mTextures.get(Textures::FinishLine);
+	/*sf::Texture& finishTexture = mTextures.get(Textures::FinishLine);
 	std::unique_ptr<SpriteNode> finishSprite(new SpriteNode(finishTexture));
 	finishSprite->setPosition(0.f, -76.f);
-	mSceneLayers[Background]->attachChild(std::move(finishSprite));
+	mSceneLayers[Background]->attachChild(std::move(finishSprite));*/
 
 	// Add particle node to the scene
 	std::unique_ptr<ParticleNode> smokeNode(new ParticleNode(Particle::Smoke, mTextures));

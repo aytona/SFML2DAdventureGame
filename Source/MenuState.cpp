@@ -10,9 +10,16 @@
 MenuState::MenuState(StateStack& stack, Context context)
 : State(stack, context)
 , mGUIContainer()
+, mTitle()
 {
 	sf::Texture& texture = context.textures->get(Textures::TitleScreen);
 	mBackgroundSprite.setTexture(texture);
+
+	mTitle.setFont(context.fonts->get(Fonts::Main));
+	mTitle.setCharacterSize(70);
+	mTitle.setString("Alien Invasion");
+	centerOrigin(mTitle);
+	mTitle.setPosition(sf::Vector2f(context.window->getSize().x / 2u, 150.f));
 
 	auto playButton = std::make_shared<GUI::Button>(*context.fonts, *context.textures);
 	playButton->setPosition(512 - (350 / 2), 300);
@@ -52,6 +59,7 @@ void MenuState::draw()
 
 	window.draw(mBackgroundSprite);
 	window.draw(mGUIContainer);
+	window.draw(mTitle);
 }
 
 bool MenuState::update(sf::Time)

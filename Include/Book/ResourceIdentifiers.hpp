@@ -23,6 +23,8 @@ namespace Textures
 		FinishLine,
 		People,
 		UFO,
+		LevelOne,
+		LevelTwo,
 	};
 }
 

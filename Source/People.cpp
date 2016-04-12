@@ -12,7 +12,11 @@ namespace
 	const std::vector<PeopleData> Table = initializePeopleData();
 }
 
-People::People(Type type, const TextureHolder& textures) : Entity(1), mType(type), mSprite(textures.get(Table[type].texture), Table[type].textureRect)
+People::People(Type type, const TextureHolder& textures) 
+	: Entity(1), 
+	mType(type), 
+	mSprite(textures.get(Table[type].texture), 
+	Table[type].textureRect)
 {
 	centerOrigin(mSprite);
 }
