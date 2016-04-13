@@ -1,6 +1,7 @@
 #include <Book/SettingsState.hpp>
 #include <Book/Utility.hpp>
 #include <Book/ResourceHolder.hpp>
+#include <iostream>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -47,6 +48,11 @@ bool SettingsState::update(sf::Time)
 bool SettingsState::handleEvent(const sf::Event& event)
 {
 	bool isKeyBinding = false;
+	
+	 if (event.type == sf::Event::MouseButtonReleased){
+		std::cout << "mousePressed" << std::endl;
+		
+	}
 	
 	// Iterate through all key binding buttons to see if they are being pressed, waiting for the user to enter a key
 	for (std::size_t action = 0; action < Player::ActionCount; ++action)
