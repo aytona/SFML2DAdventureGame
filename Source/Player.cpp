@@ -76,10 +76,10 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 	{
 		if (event.key.code == getAssignedKey(MoveUp)){
 			commands.push(mActionBinding[RotateCW]);
-			std::cout << "hi" << std::endl;
+			//std::cout << "hi" << std::endl;
 		}
 
-		std::cout << "keypressed" << event.key.code << std::endl;
+		//std::cout << "keypressed" << event.key.code << std::endl;
 		// Check if pressed key appears in key binding, trigger command if so
 		auto found = mKeyBinding.find(event.key.code);
 
@@ -121,7 +121,7 @@ void Player::handleRealtimeInput(CommandQueue& commands)
 
 void Player::MouseInput(sf::Event& event, sf::RenderWindow &mWindow){
 
-	std::cout << currentState << std::endl;
+	//std::cout << currentState << std::endl;
 
 	sf::Vector2i mousePos = sf::Mouse::getPosition(mWindow);
 
@@ -130,13 +130,17 @@ void Player::MouseInput(sf::Event& event, sf::RenderWindow &mWindow){
 	bool clickedExit = WithinBox(mousePos, 415, 606, 403, 445);
 
 	if (clickedPlay){
-		std::cout << "clicked Play at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+		//std::cout << "clicked Play at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
 		//PlayGame();
 	}
 	else if (clickedSettings)
-		std::cout << "clicked Settings at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+	{
+		//std::cout << "clicked Settings at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+	}
 	else if (clickedExit)
-		std::cout << "clicked Exit at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+	{
+		//std::cout << "clicked Exit at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+	}
 
 	//std::cout << WithinBox( sf::Mouse::getPosition(mWindow), 415,606,303,345);
 	//std::cout << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl << std::endl;
@@ -150,7 +154,7 @@ bool Player::WithinBox(sf::Vector2i mousePos, int minX, int maxX, int minY, int 
 
 void Player::assignKey(Action action, sf::Keyboard::Key key)
 {
-	std::cout << "keypressed" << std::endl;
+	//std::cout << "keypressed" << std::endl;
 	// Remove all keys that already map to action
 	for (auto itr = mKeyBinding.begin(); itr != mKeyBinding.end(); )
 	{
