@@ -268,9 +268,14 @@ void World::buildScene()
 	mPlayerAircraft = player.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
 	mSceneLayers[UpperAir]->attachChild(std::move(player));
-
+	addHumans();
 	// Add enemy aircraft
+	if (hasPlayerFinishedLevelOne())
 	addEnemies();
+	if (hasPlayerFinishedLevelTwo())
+	{ //Do something. 
+	}
+	
 }
 void World::SpawnPeople()
 {
@@ -290,7 +295,21 @@ void World::SpawnPeople()
 		mPeopleSpawnPoints.pop_back();
 	}
 }
-
+void World::addHumans()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		addPeople(People::Solo, rand() % 1024, rand() % 2000);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		addPeople(People::Group, rand() % 1024, rand() % 2000);
+	}
+	std::sort(mPeopleSpawnPoints.begin(), mPeopleSpawnPoints.end(), [](PeopleSpawn lhs, PeopleSpawn rhs)
+	{
+		return lhs.y < rhs.y;
+	});
+}
 void World::addEnemies()
 {
 	// Add enemies to the spawn point container
@@ -333,6 +352,7 @@ void World::addEnemies()
 	{
 		return lhs.y < rhs.y;
 	});
+	
 }
 
 void World::addEnemy(Aircraft::Type type, float relX, float relY)
