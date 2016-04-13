@@ -51,8 +51,8 @@ std::vector<ProjectileData> initializeProjectileData()
 
 	data[Projectile::AlliedBullet].damage = 10;
 	data[Projectile::AlliedBullet].speed = 300.f;
-	data[Projectile::AlliedBullet].texture = Textures::Entities;
-	data[Projectile::AlliedBullet].textureRect = sf::IntRect(175, 64, 3, 14);
+	data[Projectile::AlliedBullet].texture = Textures::GreenBeam;
+	data[Projectile::AlliedBullet].textureRect = sf::IntRect(1, 10, 3, 14);
 
 	data[Projectile::EnemyBullet].damage = 10;
 	data[Projectile::EnemyBullet].speed = 300.f;
@@ -61,8 +61,8 @@ std::vector<ProjectileData> initializeProjectileData()
 
 	data[Projectile::Missile].damage = 200;
 	data[Projectile::Missile].speed = 150.f;
-	data[Projectile::Missile].texture = Textures::Entities;
-	data[Projectile::Missile].textureRect = sf::IntRect(160, 64, 15, 32);
+	data[Projectile::Missile].texture = Textures::Missile;
+	data[Projectile::Missile].textureRect = sf::IntRect(0, 0, 14, 31);
 
 	return data;
 }

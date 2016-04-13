@@ -25,6 +25,8 @@ namespace Textures
 		UFO,
 		LevelOne,
 		LevelTwo,
+		GreenBeam,
+		Missile,
 	};
 }
 
