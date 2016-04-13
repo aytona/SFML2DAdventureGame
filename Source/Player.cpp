@@ -107,11 +107,11 @@ void Player::handleRealtimeInput(CommandQueue& commands)
 		// If key is pressed, lookup action and trigger corresponding command
 		if (sf::Keyboard::isKeyPressed(pair.first) && isRealtimeAction(pair.second))
 			commands.push(mActionBinding[pair.second]);
-		if (sf::Keyboard::isKeyPressed(getAssignedKey(MoveUp))){
+		if (sf::Keyboard::isKeyPressed(getAssignedKey(MoveUp)) || sf::Keyboard::isKeyPressed(getAssignedKey(MoveRight))){
 			commands.push(mActionBinding[RotateCW]);
 
 		}
-		else if (sf::Keyboard::isKeyPressed(getAssignedKey(MoveDown))){
+		else if (sf::Keyboard::isKeyPressed(getAssignedKey(MoveDown)) || sf::Keyboard::isKeyPressed(getAssignedKey(MoveLeft))){
 			commands.push(mActionBinding[RotateCCW]);
 
 		}

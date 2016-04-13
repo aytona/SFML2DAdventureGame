@@ -242,7 +242,7 @@ void Aircraft::createBullets(SceneNode& node, const TextureHolder& textures) con
 	switch (mSpreadLevel)
 	{
 		case 1:
-			createProjectile(node, type, 0.0f, -0.5f, textures);
+			createProjectile(node, type, 0.0f, 0.5f, textures);
 			break;
 
 		case 2:
@@ -265,7 +265,7 @@ void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xO
 	sf::Vector2f offset(xOffset * mSprite.getGlobalBounds().width, yOffset * mSprite.getGlobalBounds().height);
 	//sf::Vector2f velocity(0, projectile->getMaxSpeed());
 	//getRotation();
-	sf::Vector2f velocity(0.f, 500.f);
+	sf::Vector2f velocity(0.f, 150.f);
 	float sign = isAllied() ? -1.f : +1.f;
 	projectile->setPosition(getWorldPosition() + offset * sign);
 	projectile->setVelocity(velocity * sign);
