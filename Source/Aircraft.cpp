@@ -37,9 +37,19 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 , mHealthDisplay(nullptr)
 , mMissileDisplay(nullptr)
 {
-	mExplosion.setFrameSize(sf::Vector2i(256, 256));
-	mExplosion.setNumFrames(16);
-	mExplosion.setDuration(sf::seconds(1));
+	if (!isPerson())
+	{
+		mExplosion.setFrameSize(sf::Vector2i(256, 256));
+		mExplosion.setNumFrames(16);
+		mExplosion.setDuration(sf::seconds(1));
+	}
+
+	else if (isPerson())
+	{
+		mExplosion.setFrameSize(sf::Vector2i(0, 0));
+		mExplosion.setNumFrames(0);
+		mExplosion.setDuration(sf::seconds(0));
+	}
 
 	centerOrigin(mSprite);
 	centerOrigin(mExplosion);

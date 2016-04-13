@@ -41,7 +41,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 
 void World::update(sf::Time dt)
 {
-	std::cout << abductionCounter << std::endl;
+	//std::cout << abductionCounter << std::endl;
 	if (!mPlayerAircraft->isDestroyed())
 	{
 
@@ -109,12 +109,12 @@ bool World::hasAlivePlayer() const
 
 bool World::hasPlayerFinishedLevelOne() const
 {
-	return abductionCounter >= 10;
+	return abductionCounter >= 15;
 }
 
 bool World::hasPlayerFinishedLevelTwo() const
 {
-	return abductionCounter >= 30;
+	return abductionCounter >= 50;
 }
 
 void World::loadTextures()
@@ -348,19 +348,19 @@ void World::addEnemies()
 	// In level 1
 	if (!hasPlayerFinishedLevelOne())
 	{
-		for (int i = 0; i < 15; i++)
+		for (int i = 0; i < 40; i++)
 		{
-			addEnemy(Aircraft::Raptor, rand() % 1024, rand() % 2000);
+			addEnemy(Aircraft::Raptor, rand() % 3000, rand() % 2000);
 		}
 	}
 
 	// In level 2
 	else if (hasPlayerFinishedLevelOne())
 	{
-		std::cout << "Finished level one" << std::endl;
-		for (int i = 0; i < 24; i++)
+		//std::cout << "Finished level one" << std::endl;
+		for (int i = 0; i < 30; i++)
 		{
-			addEnemy(Aircraft::Avenger, rand() % 600 + (-300.f), (i * 100.f) + 500.f);
+			addEnemy(Aircraft::Avenger, rand() % 2500, (i * 100.f) + 500.f);
 		}
 	}
 
