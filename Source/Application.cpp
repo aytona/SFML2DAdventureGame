@@ -77,6 +77,7 @@ void Application::processInput()
 			mWindow.close();
 		if (event.type == sf::Event::MouseButtonPressed){
 			mPlayer.MouseInput(event,mWindow);
+			
 		}
 	}
 }

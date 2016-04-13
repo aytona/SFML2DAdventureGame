@@ -3,6 +3,7 @@
 
 #include <Book/State.hpp>
 #include <Book/Container.hpp>
+#include <Book/Player.hpp>
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
@@ -16,6 +17,7 @@ class MenuState : public State
 		virtual void			draw();
 		virtual bool			update(sf::Time dt);
 		virtual bool			handleEvent(const sf::Event& event);
+		void					MenuState::PlayGame();
 
 
 	private:

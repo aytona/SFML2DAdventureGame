@@ -2,9 +2,13 @@
 #include <Book/Button.hpp>
 #include <Book/Utility.hpp>
 #include <Book/ResourceHolder.hpp>
+#include <Book/Player.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
+#include <iostream>
+
+
 
 
 MenuState::MenuState(StateStack& stack, Context context)
@@ -28,6 +32,7 @@ MenuState::MenuState(StateStack& stack, Context context)
 	{
 		requestStackPop();
 		requestStackPush(States::LevelOne);
+		//currentState = States::LevelOne;
 	});
 
 	auto settingsButton = std::make_shared<GUI::Button>(*context.fonts, *context.textures);
@@ -36,6 +41,7 @@ MenuState::MenuState(StateStack& stack, Context context)
 	settingsButton->setCallback([this] ()
 	{
 		requestStackPush(States::Settings);
+		//currentState = States::Settings;
 	});
 
 	auto exitButton = std::make_shared<GUI::Button>(*context.fonts, *context.textures);
@@ -49,7 +55,23 @@ MenuState::MenuState(StateStack& stack, Context context)
 	mGUIContainer.pack(playButton);
 	mGUIContainer.pack(settingsButton);
 	mGUIContainer.pack(exitButton);
+
+	//Player p = Player();
+
+//	p.SetCurrentState("menu");
+
+	currentState = "Menu";
+
+	//std::cout << currentState << std::endl;
+
+//	std::cout << "menu open" << std::endl;
 }
+
+void MenuState::PlayGame(){
+	requestStackPop();
+	requestStackPush(States::LevelOne);
+}
+
 
 void MenuState::draw()
 {
@@ -60,6 +82,9 @@ void MenuState::draw()
 	window.draw(mBackgroundSprite);
 	window.draw(mGUIContainer);
 	window.draw(mTitle);
+
+	
+	//std::cout << "menu state" << std::endl;
 }
 
 bool MenuState::update(sf::Time)
@@ -69,6 +94,9 @@ bool MenuState::update(sf::Time)
 
 bool MenuState::handleEvent(const sf::Event& event)
 {
+	//std::cout << currentState << event.type << std::endl;
+	
+	//std::cout << "handling event" << std::endl;
 	mGUIContainer.handleEvent(event);
 	return false;
 }
