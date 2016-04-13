@@ -45,6 +45,8 @@ void Application::run()
 
 	while (mWindow.isOpen())
 	{
+		mPlayer.MouseInput(mWindow);
+
 		sf::Time dt = clock.restart();
 		timeSinceLastUpdate += dt;
 		while (timeSinceLastUpdate > TimePerFrame)

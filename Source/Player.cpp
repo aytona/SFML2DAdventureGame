@@ -2,10 +2,12 @@
 #include <Book/CommandQueue.hpp>
 #include <Book/Aircraft.hpp>
 #include <Book/Foreach.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 #include <map>
 #include <string>
 #include <algorithm>
+#include <iostream>
 
 using namespace std::placeholders;
 
@@ -49,16 +51,21 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 {
 	if (event.type == sf::Event::KeyPressed)
 	{
+		std::cout << "keypressed" << std::endl;
 		// Check if pressed key appears in key binding, trigger command if so
 		auto found = mKeyBinding.find(event.key.code);
 		if (found != mKeyBinding.end() && !isRealtimeAction(found->second))
 			commands.push(mActionBinding[found->second]);
+	}
+	else if (event.type == sf::Event::MouseButtonReleased){
+		std::cout << "mousePressed" << std::endl;
 	}
 }
 
 void Player::handleRealtimeInput(CommandQueue& commands)
 {
 	// Traverse all assigned keys and check if they are pressed
+	
 	FOREACH(auto pair, mKeyBinding)
 	{
 		// If key is pressed, lookup action and trigger corresponding command
@@ -67,8 +74,13 @@ void Player::handleRealtimeInput(CommandQueue& commands)
 	}
 }
 
+void Player::MouseInput(sf::RenderWindow &mWindow){
+	std::cout << sf::Mouse::getPosition(mWindow).x;
+}
+
 void Player::assignKey(Action action, sf::Keyboard::Key key)
 {
+	std::cout << "keypressed" << std::endl;
 	// Remove all keys that already map to action
 	for (auto itr = mKeyBinding.begin(); itr != mKeyBinding.end(); )
 	{

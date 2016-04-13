@@ -4,6 +4,7 @@
 #include <Book/Command.hpp>
 
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 #include <map>
 
@@ -43,6 +44,7 @@ class Player
 
 		void 					setMissionStatus(MissionStatus status);
 		MissionStatus 			getMissionStatus() const;
+		void					 MouseInput(sf::RenderWindow &mWindow);
 
 	private:
 		void					initializeActions();
