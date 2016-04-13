@@ -28,9 +28,9 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 , mIsLaunchingMissile(false)
 , mShowExplosion(true)
 , mSpawnedPickup(false)
-, mFireRateLevel(1)
+, mFireRateLevel(3)
 , mSpreadLevel(1)
-, mMissileAmmo(2)
+, mMissileAmmo(500)
 , mDropPickupCommand()
 , mTravelledDistance(0.f)
 , mDirectionIndex(0)
@@ -270,8 +270,9 @@ void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xO
 	std::unique_ptr<Projectile> projectile(new Projectile(type, textures));
 	
 	sf::Vector2f offset(xOffset * mSprite.getGlobalBounds().width, yOffset * mSprite.getGlobalBounds().height);
-	sf::Vector2f velocity(0, projectile->getMaxSpeed());
-
+	//sf::Vector2f velocity(0, projectile->getMaxSpeed());
+	//getRotation();
+	sf::Vector2f velocity(0.f, 150.f);
 	float sign = isAllied() ? -1.f : +1.f;
 	projectile->setPosition(getWorldPosition() + offset * sign);
 	projectile->setVelocity(velocity * sign);
@@ -301,10 +302,12 @@ void Aircraft::updateTexts()
 	// Display missiles, if available
 	if (mMissileDisplay)
 	{
-		if (mMissileAmmo == 0 || isDestroyed())
+		mMissileDisplay->setString("");
+	/*	if (mMissileAmmo == 0 || isDestroyed())
 			mMissileDisplay->setString("");
 		else
 			mMissileDisplay->setString("M: " + toString(mMissileAmmo));
+			*/
 	}
 }
 

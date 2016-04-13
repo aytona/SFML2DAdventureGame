@@ -5,14 +5,19 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <string>
 
 #include <map>
 
+static std::string currentState = "k"; 
 
 class CommandQueue;
 
 class Player
 {
+
+
+
 	public:
 		enum Action
 		{
@@ -34,6 +39,7 @@ class Player
 			MissionFailure
 		};
 
+	
 
 	public:
 								Player();
@@ -46,7 +52,10 @@ class Player
 
 		void 					setMissionStatus(MissionStatus status);
 		MissionStatus 			getMissionStatus() const;
-		void					 MouseInput(sf::RenderWindow &mWindow);
+		void					 MouseInput(sf::Event& event, sf::RenderWindow &mWindow);
+		bool					WithinBox(sf::Vector2i mousePos, int minX, int maxX, int minY, int maxY);
+		
+		
 
 	private:
 		void					initializeActions();

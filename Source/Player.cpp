@@ -3,6 +3,8 @@
 #include <Book/Aircraft.hpp>
 #include <Book/Foreach.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <Book/MenuState.hpp>
+#include <string>
 
 #include <map>
 #include <string>
@@ -10,6 +12,7 @@
 #include <iostream>
 
 using namespace std::placeholders;
+
 
 
 struct AircraftMover
@@ -31,7 +34,7 @@ struct AircraftMover
 struct AircraftRotator
 {
 	AircraftRotator(float degree)
-		: rotation(degree)
+		: rotation(degree/10.f)
 	{
 	}
 
@@ -43,8 +46,10 @@ struct AircraftRotator
 	float rotation;
 };
 
+
+
 Player::Player()
-: mCurrentMissionStatus(MissionRunning)
+	: mCurrentMissionStatus(MissionRunning)
 {
 	// Set initial key bindings
 	mKeyBinding[sf::Keyboard::A] = MoveLeft;
@@ -56,6 +61,7 @@ Player::Player()
 	mKeyBinding[sf::Keyboard::E] = RotateCW;
 	mKeyBinding[sf::Keyboard::Q] = RotateCCW;
  
+	//currentState = "";
 	// Set initial action bindings
 	initializeActions();	
 
@@ -68,14 +74,27 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 {
 	if (event.type == sf::Event::KeyPressed)
 	{
-		std::cout << "keypressed" << std::endl;
+		if (event.key.code == getAssignedKey(MoveUp)){
+			commands.push(mActionBinding[RotateCW]);
+			std::cout << "hi" << std::endl;
+		}
+
+		std::cout << "keypressed" << event.key.code << std::endl;
 		// Check if pressed key appears in key binding, trigger command if so
 		auto found = mKeyBinding.find(event.key.code);
+
 		if (found != mKeyBinding.end() && !isRealtimeAction(found->second))
 			commands.push(mActionBinding[found->second]);
 	}
-	else if (event.type == sf::Event::MouseButtonReleased){
-		std::cout << "mousePressed" << std::endl;
+	else if (event.type == sf::Event::MouseButtonPressed){
+
+
+
+		commands.push(mActionBinding[LaunchMissile]);
+
+		//handleEvent(e, commands);
+
+		//std::cout << "mousePressed " << e.key.code << std::endl;
 	}
 }
 
@@ -88,11 +107,45 @@ void Player::handleRealtimeInput(CommandQueue& commands)
 		// If key is pressed, lookup action and trigger corresponding command
 		if (sf::Keyboard::isKeyPressed(pair.first) && isRealtimeAction(pair.second))
 			commands.push(mActionBinding[pair.second]);
+		if (sf::Keyboard::isKeyPressed(getAssignedKey(MoveUp)) || sf::Keyboard::isKeyPressed(getAssignedKey(MoveRight))){
+			commands.push(mActionBinding[RotateCW]);
+
+		}
+		else if (sf::Keyboard::isKeyPressed(getAssignedKey(MoveDown)) || sf::Keyboard::isKeyPressed(getAssignedKey(MoveLeft))){
+			commands.push(mActionBinding[RotateCCW]);
+
+		}
+		//std::cout << "hi " << std::endl;
 	}
 }
 
-void Player::MouseInput(sf::RenderWindow &mWindow){
-	std::cout << sf::Mouse::getPosition(mWindow).x;
+void Player::MouseInput(sf::Event& event, sf::RenderWindow &mWindow){
+
+	std::cout << currentState << std::endl;
+
+	sf::Vector2i mousePos = sf::Mouse::getPosition(mWindow);
+
+	bool clickedPlay = WithinBox(mousePos, 415, 606, 303, 345);
+	bool clickedSettings = WithinBox(mousePos, 415, 606, 353, 395);
+	bool clickedExit = WithinBox(mousePos, 415, 606, 403, 445);
+
+	if (clickedPlay){
+		std::cout << "clicked Play at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+		//PlayGame();
+	}
+	else if (clickedSettings)
+		std::cout << "clicked Settings at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+	else if (clickedExit)
+		std::cout << "clicked Exit at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+
+	//std::cout << WithinBox( sf::Mouse::getPosition(mWindow), 415,606,303,345);
+	//std::cout << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl << std::endl;
+}
+
+bool Player::WithinBox(sf::Vector2i mousePos, int minX, int maxX, int minY, int maxY){
+
+	return(mousePos.x >= minX && mousePos.x <= maxX
+		&& mousePos.y >= minY && mousePos.y <= maxY);
 }
 
 void Player::assignKey(Action action, sf::Keyboard::Key key)
@@ -142,6 +195,8 @@ void Player::initializeActions()
 	mActionBinding[LaunchMissile].action = derivedAction<Aircraft>([] (Aircraft& a, sf::Time) { a.launchMissile(); });
 	mActionBinding[RotateCW].action = derivedAction<Aircraft>(AircraftRotator(+1));
 	mActionBinding[RotateCCW].action = derivedAction<Aircraft>(AircraftRotator(-1));
+//	currentState = "";
+
 }
 
 bool Player::isRealtimeAction(Action action)

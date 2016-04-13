@@ -119,7 +119,9 @@ bool World::hasPlayerFinishedLevelTwo() const
 
 void World::loadTextures()
 {
+	mTextures.load(Textures::Missile, "Media/Textures/Missile.png");
 	mTextures.load(Textures::Entities, "Media/Textures/Entities.png");
+	mTextures.load(Textures::GreenBeam, "Media/Textures/GreenBeam.png");
 	mTextures.load(Textures::Jungle, "Media/Textures/Jungle.png");
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 	mTextures.load(Textures::Particle, "Media/Textures/Particle.png");
