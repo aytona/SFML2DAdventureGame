@@ -64,6 +64,7 @@ class Player
 
 	private:
 		std::map<sf::Keyboard::Key, Action>		mKeyBinding;
+		std::map<sf::Joystick::Axis, Action>	mJoyBinding;
 		std::map<Action, Command>				mActionBinding;
 		MissionStatus 							mCurrentMissionStatus;
 };

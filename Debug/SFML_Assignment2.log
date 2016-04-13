@@ -1,11 +1,12 @@
-﻿Build started 2016-03-26 8:13:12 PM.
-     1>Project "C:\Users\The Boss\Desktop\GitHub\SFML_Assignment2\SFML_Assignment2.vcxproj" on node 2 (Build target(s)).
+﻿Build started 4/13/2016 9:55:14 AM.
+     1>Project "C:\Users\caytona\Desktop\Git\sfml_assignment2\SFML_Assignment2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\The Boss\Desktop\GitHub\SFML_Assignment2\\Include" /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt source\World.cpp
-         World.cpp
-     1>source\World.cpp(300): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\caytona\Desktop\Git\sfml_assignment2\\Include /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt source\Container.cpp
+         Container.cpp
+     1>source\Container.cpp(34): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>source\Container.cpp(35): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\The Boss\Desktop\GitHub\SFML_Assignment2\Debug\SFML_Assignment2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\The Boss\Desktop\GitHub\SFML_Assignment2\\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-main-d.lib" "sfml-network-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\The Boss\Desktop\GitHub\SFML_Assignment2\Debug\SFML_Assignment2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\The Boss\Desktop\GitHub\SFML_Assignment2\Debug\SFML_Assignment2.lib" /MACHINE:X86 Debug\Aircraft.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\caytona\Desktop\Git\SFML_Assignment2\Debug\SFML_Assignment2.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\caytona\Desktop\Git\SFML_Assignment2\\lib "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-main-d.lib" "sfml-network-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\caytona\Desktop\Git\SFML_Assignment2\Debug\SFML_Assignment2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\caytona\Desktop\Git\SFML_Assignment2\Debug\SFML_Assignment2.lib" /MACHINE:X86 Debug\Aircraft.obj
          Debug\Animation.obj
          Debug\Application.obj
          Debug\BloomEffect.obj
@@ -25,6 +26,7 @@
          Debug\MenuState.obj
          Debug\ParticleNode.obj
          Debug\PauseState.obj
+         Debug\People.obj
          Debug\Pickup.obj
          Debug\Player.obj
          Debug\PostEffect.obj
@@ -38,9 +40,9 @@
          Debug\TitleState.obj
          Debug\Utility.obj
          Debug\World.obj
-         SFML_Assignment2.vcxproj -> C:\Users\The Boss\Desktop\GitHub\SFML_Assignment2\Debug\SFML_Assignment2.exe
-     1>Done Building Project "C:\Users\The Boss\Desktop\GitHub\SFML_Assignment2\SFML_Assignment2.vcxproj" (Build target(s)).
+         SFML_Assignment2.vcxproj -> C:\Users\caytona\Desktop\Git\SFML_Assignment2\Debug\SFML_Assignment2.exe
+     1>Done Building Project "C:\Users\caytona\Desktop\Git\sfml_assignment2\SFML_Assignment2.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.35
+Time Elapsed 00:00:00.85

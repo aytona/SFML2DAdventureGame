@@ -4,7 +4,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
-
+#include <iostream>
 
 namespace GUI
 {
@@ -30,22 +30,31 @@ bool Container::isSelectable() const
 
 void Container::handleEvent(const sf::Event& event)
 {
+	
+		int joyx = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::X);
+		int joyy = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Y);
+
+
+	
+
+		std::cout << event.type << std::endl;
+
     // If we have selected a child then give it events
 	if (hasSelection() && mChildren[mSelectedChild]->isActive())
 	{
 		mChildren[mSelectedChild]->handleEvent(event);
 	}
-	else if (event.type == sf::Event::KeyReleased)
+	else if (event.type == sf::Event::KeyReleased || event.type == sf::Event::JoystickMoved || sf::Event::JoystickButtonPressed)
 	{
-		if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
+		if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up || joyy == -100)
 		{
 			selectPrevious();
 		}
-		else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down)
+		else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down || joyy == 100)
 		{
 			selectNext();
 		}
-		else if (event.key.code == sf::Keyboard::Return || event.key.code == sf::Keyboard::Space)
+		else if (event.key.code == sf::Keyboard::Return || event.key.code == sf::Keyboard::Space || event.type == sf::Event::JoystickButtonPressed)
 		{
 			if (hasSelection())
 				mChildren[mSelectedChild]->activate();

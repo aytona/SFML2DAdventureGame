@@ -94,9 +94,15 @@ bool MenuState::update(sf::Time)
 
 bool MenuState::handleEvent(const sf::Event& event)
 {
-	//std::cout << currentState << event.type << std::endl;
+
+
 	
-	//std::cout << "handling event" << std::endl;
-	mGUIContainer.handleEvent(event);
+	
+
+		//std::cout << currentState << event.type << std::endl;
+
+		//std::cout << "handling event" << std::endl;
+		mGUIContainer.handleEvent(event);
+	
 	return false;
 }

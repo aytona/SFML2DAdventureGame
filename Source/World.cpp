@@ -31,7 +31,8 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 , timer(60.f)
 {
 	mSceneTexture.create(mTarget.getSize().x, mTarget.getSize().y);
-
+	if (abductionCounter >= 50)
+		abductionCounter = 0;
 	loadTextures();
 	buildScene();
 

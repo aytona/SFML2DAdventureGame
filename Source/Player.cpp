@@ -60,6 +60,9 @@ Player::Player()
 	mKeyBinding[sf::Keyboard::M] = LaunchMissile;
 	mKeyBinding[sf::Keyboard::E] = RotateCW;
 	mKeyBinding[sf::Keyboard::Q] = RotateCCW;
+
+	mJoyBinding[sf::Joystick::X] = MoveUp;
+	mJoyBinding[sf::Joystick::Y] = MoveDown;
  
 	//currentState = "";
 	// Set initial action bindings
@@ -86,7 +89,7 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 		if (found != mKeyBinding.end() && !isRealtimeAction(found->second))
 			commands.push(mActionBinding[found->second]);
 	}
-	else if (event.type == sf::Event::MouseButtonPressed){
+	else if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::JoystickButtonPressed){
 
 
 
@@ -95,6 +98,23 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 		//handleEvent(e, commands);
 
 		//std::cout << "mousePressed " << e.key.code << std::endl;
+	}
+	else if (event.type == sf::Event::JoystickMoved){
+		int joyx = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::X);
+		int joyy = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Y);
+		if (joyx == 100 )
+			commands.push(mActionBinding[MoveRight]);
+		else if (joyx == -100)
+			commands.push(mActionBinding[MoveLeft]);
+
+		if (joyy == 100)
+			commands.push(mActionBinding[MoveUp]);
+		else if (joyy == -100)
+			commands.push(mActionBinding[MoveDown]);
+
+		std::cout << "hi" << sf::Joystick::Axis::X << std::endl;
+		std::cout << sf::Joystick::getAxisPosition(0,sf::Joystick::Axis::X) << std::endl;
+		
 	}
 }
 
