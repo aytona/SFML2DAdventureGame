@@ -1,6 +1,7 @@
 #include <Book/SettingsState.hpp>
 #include <Book/Utility.hpp>
 #include <Book/ResourceHolder.hpp>
+#include <iostream>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -18,11 +19,13 @@ SettingsState::SettingsState(StateStack& stack, Context context)
 	addButtonLabel(Player::MoveDown,		250.f, "Move Down", context);
 	addButtonLabel(Player::Fire,			300.f, "Fire", context);
 	addButtonLabel(Player::LaunchMissile,	350.f, "Missile", context);
+	addButtonLabel(Player::RotateCW, 400.f, "Rotate Clockwise", context);
+	addButtonLabel(Player::RotateCCW, 450.f, "Rotate Counter-Clockwise", context);
 
 	updateLabels();
 
 	auto backButton = std::make_shared<GUI::Button>(*context.fonts, *context.textures);
-	backButton->setPosition(512 - (350 / 2), 500.f);
+	backButton->setPosition(512 - (350 / 2), 525.f);
 	backButton->setText("Back");
 	backButton->setCallback(std::bind(&SettingsState::requestStackPop, this));
 
@@ -45,6 +48,11 @@ bool SettingsState::update(sf::Time)
 bool SettingsState::handleEvent(const sf::Event& event)
 {
 	bool isKeyBinding = false;
+	
+	 if (event.type == sf::Event::MouseButtonReleased){
+		std::cout << "mousePressed" << std::endl;
+		
+	}
 	
 	// Iterate through all key binding buttons to see if they are being pressed, waiting for the user to enter a key
 	for (std::size_t action = 0; action < Player::ActionCount; ++action)
