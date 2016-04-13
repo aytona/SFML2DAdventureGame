@@ -18,6 +18,8 @@
 #include <queue>
 
 
+static float								abductionCounter;
+
 // Forward declaration
 namespace sf
 {
@@ -34,14 +36,13 @@ class World : private sf::NonCopyable
 		CommandQueue&						getCommandQueue();
 		
 		bool 								hasAlivePlayer() const;
-		bool 								hasPlayerReachedEnd() const;
+		//bool 								hasPlayerReachedEnd() const;
 		bool								hasPlayerFinishedLevelOne() const;
 		bool								hasPlayerFinishedLevelTwo() const;
 
 		void                                SpawnPeople();
 
 
-		float								abductionCounter;
 		float								timer;
 
 

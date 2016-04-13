@@ -31,6 +31,7 @@ class Aircraft : public Entity
 		virtual void			remove();
 		virtual bool 			isMarkedForRemoval() const;
 		bool					isAllied() const;
+		bool					isPerson() const;
 		float					getMaxSpeed() const;
 
 		void					increaseFireRate();

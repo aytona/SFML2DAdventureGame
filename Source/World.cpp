@@ -11,6 +11,8 @@
 #include <limits>
 #include <iostream>
 using namespace std;
+
+
 World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 : mTarget(outputTarget)
 , mSceneTexture()
@@ -27,7 +29,6 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 , mActiveEnemies()
 , mPeopleSpawnPoints()
 , timer(60.f)
-, abductionCounter(0)
 {
 	mSceneTexture.create(mTarget.getSize().x, mTarget.getSize().y);
 
@@ -40,12 +41,11 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts)
 
 void World::update(sf::Time dt)
 {
+	std::cout << abductionCounter << std::endl;
 	if (!mPlayerAircraft->isDestroyed())
 	{
 
 	// Scroll the world, reset player velocity
-
-		cout << abductionCounter << endl;
 	mWorldView.move(mPlayerAircraft->getVelocity()*dt.asSeconds());
 
 	}
@@ -71,8 +71,7 @@ void World::update(sf::Time dt)
 	mSceneGraph.update(dt, mCommandQueue);
 	adaptPlayerPosition();
 
-	if (hasPlayerFinishedLevelOne())
-		timer -= dt.asSeconds();
+	
 }
 
 void World::draw()
@@ -103,19 +102,19 @@ bool World::hasAlivePlayer() const
 	return !mPlayerAircraft->isMarkedForRemoval();
 }
 
-bool World::hasPlayerReachedEnd() const
-{
-	return !mWorldBounds.contains(mPlayerAircraft->getPosition());
-}
+//bool World::hasPlayerReachedEnd() const
+//{
+//	return !mWorldBounds.contains(mPlayerAircraft->getPosition());
+//}
 
 bool World::hasPlayerFinishedLevelOne() const
 {
-	return abductionCounter >= 15;
+	return abductionCounter >= 10;
 }
 
 bool World::hasPlayerFinishedLevelTwo() const
 {
-	return timer <= 0;
+	return abductionCounter >= 30;
 }
 
 void World::loadTextures()
@@ -125,7 +124,7 @@ void World::loadTextures()
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 	mTextures.load(Textures::Particle, "Media/Textures/Particle.png");
 	mTextures.load(Textures::FinishLine, "Media/Textures/FinishLine.png");
-	mTextures.load(Textures::People, "Media/Textures/People.png");
+	mTextures.load(Textures::People, "Media/Textures/user.png");
 	mTextures.load(Textures::UFO, "Media/Textures/UFO.png");	
 	mTextures.load(Textures::LevelOne, "Media/Textures/LevelOne.jpg");
 	mTextures.load(Textures::LevelTwo, "Media/Textures/LevelTwo.jpg");
@@ -189,7 +188,7 @@ void World::handleCollisions()
 		{
 			auto& player = static_cast<Aircraft&>(*pair.first);
 			auto& enemy = static_cast<Aircraft&>(*pair.second);
-
+			abductionCounter += 3;
 			// Collision: Player damage = enemy's remaining HP
 			player.damage(enemy.getHitpoints());
 			enemy.destroy();
@@ -199,7 +198,7 @@ void World::handleCollisions()
 		{
 			auto& player = static_cast<Aircraft&>(*pair.first);
 			auto& pickup = static_cast<Pickup&>(*pair.second);
-			abductionCounter++;
+			//abductionCounter++;
 			// Apply pickup effect to player, destroy projectile
 			pickup.apply(player);
 			pickup.destroy();
@@ -210,10 +209,18 @@ void World::handleCollisions()
 		{
 			auto& aircraft = static_cast<Aircraft&>(*pair.first);
 			auto& projectile = static_cast<Projectile&>(*pair.second);
-			abductionCounter++;
+			abductionCounter += 5;
 			// Apply projectile damage to aircraft, destroy projectile
 			aircraft.damage(projectile.getDamage());
 			projectile.destroy();
+		}
+		
+		else if (matchesCategories(pair, Category::PlayerAircraft, Category::PeopleAircraft))
+		{
+			auto& aircraft = static_cast<Aircraft&>(*pair.first);
+			auto& person = static_cast<Aircraft&>(*pair.second);
+			abductionCounter++;
+			person.destroy();
 		}
 	}
 }
@@ -268,14 +275,10 @@ void World::buildScene()
 	mPlayerAircraft = player.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
 	mSceneLayers[UpperAir]->attachChild(std::move(player));
-	addHumans();
+	//addHumans();
+
 	// Add enemy aircraft
-	if (hasPlayerFinishedLevelOne())
 	addEnemies();
-	if (hasPlayerFinishedLevelTwo())
-	{ //Do something. 
-	}
-	
 }
 void World::SpawnPeople()
 {
@@ -297,6 +300,7 @@ void World::SpawnPeople()
 }
 void World::addHumans()
 {
+	
 	for (int i = 0; i < 5; i++)
 	{
 		addPeople(People::Solo, rand() % 1024, rand() % 2000);
@@ -339,14 +343,26 @@ void World::addEnemies()
 	addEnemy(Aircraft::Raptor,  200.f, 4200.f);
 	addEnemy(Aircraft::Raptor,    0.f, 4400.f);*/
 
-	for (int i = 0; i < 24; i++)
+	// In level 1
+	if (!hasPlayerFinishedLevelOne())
 	{
-		addEnemy(Aircraft::Raptor, rand() % 600 + (-300.f), (i * 100.f) + 500.f);
+		for (int i = 0; i < 15; i++)
+		{
+			addEnemy(Aircraft::Raptor, rand() % 1024, rand() % 2000);
+		}
 	}
-	for (int i = 0; i < 15; i++)
+
+	// In level 2
+	else if (hasPlayerFinishedLevelOne())
 	{
-		addEnemy(Aircraft::Avenger, rand() % 1024, rand() % 2000);
+		std::cout << "Finished level one" << std::endl;
+		for (int i = 0; i < 24; i++)
+		{
+			addEnemy(Aircraft::Avenger, rand() % 600 + (-300.f), (i * 100.f) + 500.f);
+		}
 	}
+
+	
 	// Sort all enemies according to their y value, such that lower enemies are checked first for spawning
 	std::sort(mEnemySpawnPoints.begin(), mEnemySpawnPoints.end(), [] (SpawnPoint lhs, SpawnPoint rhs)
 	{

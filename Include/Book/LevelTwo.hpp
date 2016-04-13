@@ -21,4 +21,5 @@ public:
 private:
 	World				mWorld;
 	Player&				mPlayer;
+	sf::Text			mPeopleCounter;
 };

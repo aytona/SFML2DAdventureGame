@@ -13,10 +13,11 @@ namespace Category
 		PlayerAircraft		= 1 << 2,
 		AlliedAircraft		= 1 << 3,
 		EnemyAircraft		= 1 << 4,
-		Pickup				= 1 << 5,
-		AlliedProjectile	= 1 << 6,
-		EnemyProjectile		= 1 << 7,
-		ParticleSystem		= 1 << 8,
+		PeopleAircraft		= 1 << 5,
+		Pickup				= 1 << 6,
+		AlliedProjectile	= 1 << 7,
+		EnemyProjectile		= 1 << 8,
+		ParticleSystem		= 1 << 9,
 		
 
 		Aircraft = PlayerAircraft | AlliedAircraft | EnemyAircraft,

@@ -13,6 +13,7 @@ std::vector<AircraftData> initializeAircraftData()
 {
 	std::vector<AircraftData> data(Aircraft::TypeCount);
 
+	// Player
 	data[Aircraft::Eagle].hitpoints = 100;
 	data[Aircraft::Eagle].speed = 200.f;
 	data[Aircraft::Eagle].fireInterval = sf::seconds(1);
@@ -20,16 +21,18 @@ std::vector<AircraftData> initializeAircraftData()
 	data[Aircraft::Eagle].textureRect = sf::IntRect(0, 0, 100, 99);
 	data[Aircraft::Eagle].hasRollAnimation = false;
 
-	data[Aircraft::Raptor].hitpoints = 20;
-	data[Aircraft::Raptor].speed = 80.f;
-	data[Aircraft::Raptor].texture = Textures::Entities;
-	data[Aircraft::Raptor].textureRect = sf::IntRect(144, 0, 84, 64);
+	// People
+	data[Aircraft::Raptor].hitpoints = 1;
+	data[Aircraft::Raptor].speed = 0.f;
+	data[Aircraft::Raptor].texture = Textures::People;
+	data[Aircraft::Raptor].textureRect = sf::IntRect(0, 0, 50, 50);
 	data[Aircraft::Raptor].directions.push_back(Direction(+45.f, 80.f));
 	data[Aircraft::Raptor].directions.push_back(Direction(-45.f, 160.f));
 	data[Aircraft::Raptor].directions.push_back(Direction(+45.f, 80.f));
 	data[Aircraft::Raptor].fireInterval = sf::Time::Zero;
 	data[Aircraft::Raptor].hasRollAnimation = false;
 
+	// Enemies
 	data[Aircraft::Avenger].hitpoints = 40;
 	data[Aircraft::Avenger].speed = 50.f;
 	data[Aircraft::Avenger].texture = Textures::Entities;

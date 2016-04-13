@@ -111,6 +111,8 @@ unsigned int Aircraft::getCategory() const
 {
 	if (isAllied())
 		return Category::PlayerAircraft;
+	else if (isPerson())
+		return Category::PeopleAircraft;
 	else
 		return Category::EnemyAircraft;
 }
@@ -134,6 +136,11 @@ void Aircraft::remove()
 bool Aircraft::isAllied() const
 {
 	return mType == Eagle;
+}
+
+bool Aircraft::isPerson() const
+{
+	return mType == Raptor;
 }
 
 float Aircraft::getMaxSpeed() const
@@ -261,7 +268,7 @@ void Aircraft::createBullets(SceneNode& node, const TextureHolder& textures) con
 void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, const TextureHolder& textures) const
 {
 	std::unique_ptr<Projectile> projectile(new Projectile(type, textures));
-
+	
 	sf::Vector2f offset(xOffset * mSprite.getGlobalBounds().width, yOffset * mSprite.getGlobalBounds().height);
 	sf::Vector2f velocity(0, projectile->getMaxSpeed());
 

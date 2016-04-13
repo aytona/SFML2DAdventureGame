@@ -11,8 +11,8 @@ LevelOne::LevelOne(StateStack& stack, Context context)
 {
 	mPlayer.setMissionStatus(Player::MissionRunning);
 	mPeopleCounter.setFont(context.fonts->get(Fonts::Main));
-	mPeopleCounter.setCharacterSize(20);
-	mPeopleCounter.setString("Abducted: " + toString(mPeopleAmount));
+	mPeopleCounter.setCharacterSize(25);
+	mPeopleCounter.setString("Level One");
 	centerOrigin(mPeopleCounter);
 	mPeopleCounter.setPosition(sf::Vector2f(context.window->getSize().x / 2u, 50.f));
 
