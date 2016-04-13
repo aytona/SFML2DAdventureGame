@@ -45,7 +45,7 @@ void Application::run()
 
 	while (mWindow.isOpen())
 	{
-		mPlayer.MouseInput(mWindow);
+		
 
 		sf::Time dt = clock.restart();
 		timeSinceLastUpdate += dt;
@@ -75,6 +75,9 @@ void Application::processInput()
 
 		if (event.type == sf::Event::Closed)
 			mWindow.close();
+		if (event.type == sf::Event::MouseButtonPressed){
+			mPlayer.MouseInput(event,mWindow);
+		}
 	}
 }
 

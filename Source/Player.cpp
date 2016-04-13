@@ -91,8 +91,27 @@ void Player::handleRealtimeInput(CommandQueue& commands)
 	}
 }
 
-void Player::MouseInput(sf::RenderWindow &mWindow){
-	std::cout << sf::Mouse::getPosition(mWindow).x;
+void Player::MouseInput(sf::Event& event, sf::RenderWindow &mWindow){
+
+	bool clickedPlay = WithinBox(sf::Mouse::getPosition(mWindow), 415, 606, 303, 345);
+	bool clickedSettings = WithinBox(sf::Mouse::getPosition(mWindow), 415, 606, 353, 395);
+	bool clickedExit = WithinBox(sf::Mouse::getPosition(mWindow), 415, 606, 403, 445);
+
+	if (clickedPlay)
+		std::cout << "clicked Play at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+	else if (clickedSettings)
+		std::cout << "clicked Settings at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+	else if (clickedExit)
+		std::cout << "clicked Exit at" << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl;
+
+	//std::cout << WithinBox( sf::Mouse::getPosition(mWindow), 415,606,303,345);
+	//std::cout << sf::Mouse::getPosition(mWindow).x << " " << sf::Mouse::getPosition(mWindow).y << std::endl << std::endl;
+}
+
+bool Player::WithinBox(sf::Vector2i mousePos, int minX, int maxX, int minY, int maxY){
+
+	return(mousePos.x >= minX && mousePos.x <= maxX
+		&& mousePos.y >= minY && mousePos.y <= maxY);
 }
 
 void Player::assignKey(Action action, sf::Keyboard::Key key)
